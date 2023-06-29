@@ -1,0 +1,144 @@
+*, html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background: #FCECEC;
+}
+
+
+.header {
+    display: flex;
+    width: 100%;
+    height: 125px;
+    background: #F5D6D6;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header_cart {
+    height: 40px;
+    width: 40px;
+}
+
+.header_h1 {
+    font-size: 2em;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    margin-left: 20px;
+}
+
+.header_cart__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card_btn__wraper {
+    display: flex;
+}
+.card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 500px;
+    width: 400px;
+    border: 2px solid #FFDAB9;
+    border-radius: 5px;
+    margin: 15px 20px 15px 0;
+}
+
+.card_count {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.img {
+    width: 370px;
+    height: 380px;
+}
+
+
+.card_tittle {
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 5px;
+}
+
+.card_btn__add {
+    display: flex;
+    width: 370px;
+    background-color: #FFC0CB;
+    height: 30px;
+    border-radius: 7px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card_btn__decrease, .card_btn__increase {
+    display: flex;
+    width: 180px;
+    background-color: #FFC0CB;
+    height: 30px;
+    border-radius: 7px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card_btn_crease {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_btn__decrease img, .card_btn__increase img{
+    height: 20px;
+    width: 20px;
+}
+
+.card_btn__decrease {
+    margin-right: 5px;
+}
+
+.card_btn__add img {
+    height: 20px;
+    width: 20px;
+}
+
+@media (max-width: 767px) {
+    .main {
+        flex-direction: column;
+    }
+    .card {
+        width: 300px;
+    }
+    .img {
+        width: 300px;
+    }
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .card_btn__add {
+        width: 280px;
+    }
+    .card_btn__decrease, .card_btn__increase {
+        width: 135px;
+    }
+}
