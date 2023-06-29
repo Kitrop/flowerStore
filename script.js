@@ -1,20 +1,48 @@
-const roseAdd = document.querySelector('#rosa')
-const pioniAdd = document.querySelector('#pioni')
-const romashkiAdd = document.querySelector('#romashki')
-const tulpaniAdd = document.querySelector('#tulpani')
+// Функция для получения элемента DOM по его идентификатору
+function getElementById(id) {
+    return document.querySelector(`#${id}`);
+}
 
-const countCart = document.querySelector('#count')
+// Функция для подсчета количества повторений строки в массиве
+function countOccurrences(array, searchString) {
+    return array.reduce((count, string) => count + (string === searchString ? 1 : 0), 0);
+}
 
-const roseCrease = document.querySelector('#rosa_crease')
-const pioniCrease = document.querySelector('#pioni_crease')
-const romashkiCrease = document.querySelector('#romashki_crease')
-const tulpaniCrease = document.querySelector('#tulpani_crease')
+// Функция для обновления элемента счетчика
+function updateCountElement(countElement, count) {
+    countElement.innerHTML = count !== 0 ? `Количество: ${count}` : '';
+}
 
-const countRose = document.querySelector('#countRose')
-const countDaisies = document.querySelector('#countDaisies')
-const countPeonies = document.querySelector('#countPeonies')
-const countTulips = document.querySelector('#countTulips')
+// Получение элементов DOM
+const roseAdd = getElementById('rosa');
+const pioniAdd = getElementById('pioni');
+const romashkiAdd = getElementById('romashki');
+const tulpaniAdd = getElementById('tulpani');
 
+const countCart = getElementById('count');
+
+const roseCrease = getElementById('rosa_crease');
+const pioniCrease = getElementById('pioni_crease');
+const romashkiCrease = getElementById('romashki_crease');
+const tulpaniCrease = getElementById('tulpani_crease');
+
+const countRose = getElementById('countRose');
+const countDaisies = getElementById('countDaisies');
+const countPeonies = getElementById('countPeonies');
+const countTulips = getElementById('countTulips');
+
+// Объект с информацией о цветах
+const flowers = {
+    'Розы': { add: roseAdd, crease: roseCrease },
+    'Тюльпаны': { add: tulpaniAdd, crease: tulpaniCrease },
+    'Ромашки': { add: romashkiAdd, crease: romashkiCrease },
+    'Пионы': { add: pioniAdd, crease: pioniCrease }
+};
+
+// Создание отслеживаемого массива
+const order = createTrackedArray([], onChange);
+
+// Функция для создания отслеживаемого массива с обратным вызовом при изменениях
 function createTrackedArray(array, onChange) {
     return new Proxy(array, {
         set(target, property, value) {
@@ -30,84 +58,44 @@ function createTrackedArray(array, onChange) {
     });
 }
 
-const flowers = {
-    'Розы': { add: roseAdd, crease: roseCrease },
-    'Тюльпаны': { add: tulpaniAdd, crease: tulpaniCrease },
-    'Ромашки': { add: romashkiAdd, crease: romashkiCrease },
-    'Пионы': { add: pioniAdd, crease: pioniCrease }
-};
-
-
-function countOccurrences(array, searchString) {
-    let count = 0;
-    for (const string of array) {
-        if (string === searchString) {
-            count++;
-        }
-    }
-    return count;
-}
-
-
-const onChange = () => {
+// Обработчик изменений в массиве
+function onChange() {
+    // Обновление видимости элементов в зависимости от наличия цветов в заказе
     for (const flower in flowers) {
         const { add, crease } = flowers[flower];
         if (order.includes(flower)) {
             add.style.display = 'none';
             crease.style.display = 'flex';
-        }
-        else {
+        } else {
             add.style.display = 'flex';
             crease.style.display = 'none';
         }
     }
-    const countRoseFn = countOccurrences(order, 'Розы')
-    const countPeoniesFn = countOccurrences(order, 'Пионы')
-    const countTulipsFn = countOccurrences(order, 'Тюльпаны')
-    const countDaisiesFn = countOccurrences(order, 'Ромашки')
 
+    // Подсчет и обновление количества цветов в заказе
+    const countRoseFn = countOccurrences(order, 'Розы');
+    const countPeoniesFn = countOccurrences(order, 'Пионы');
+    const countTulipsFn = countOccurrences(order, 'Тюльпаны');
+    const countDaisiesFn = countOccurrences(order, 'Ромашки');
 
-    if (countRoseFn !== 0 ) {
-        countRose.innerHTML = `Количество: ${countRoseFn}`
-    }
-    else if (countRoseFn === 0) {
-        countRose.innerHTML = ''
-    }
+    updateCountElement(countRose, countRoseFn);
+    updateCountElement(countPeonies, countPeoniesFn);
+    updateCountElement(countTulips, countTulipsFn);
+    updateCountElement(countDaisies, countDaisiesFn);
 
-    if (countPeoniesFn !== 0 ) {
-        countPeonies.innerHTML = `Количество: ${countPeoniesFn}`
-    }
-    else if (countPeoniesFn === 0) {
-        countPeonies.innerHTML = ''
-    }
+    // Обновление общего количества товаров в корзине
+    countCart.innerHTML = `(${order.length})`;
+}
 
-    if (countTulipsFn !== 0 ) {
-        countTulips.innerHTML = `Количество: ${countTulipsFn}`
-    }
-    else if (countTulipsFn === 0) {
-        countTulips.innerHTML = ''
-    }
-
-    if (countDaisiesFn !== 0 ) {
-        countDaisies.innerHTML = `Количество: ${countDaisiesFn}`
-    }
-    else if (countDaisiesFn === 0) {
-        countDaisies.innerHTML = ''
-    }
-
-    countCart.innerHTML = `(${order.length})`
+// Функция для добавления цвета в заказ
+const addToCart = (item) => {
+    order.push(item);
 };
 
-
-const order = createTrackedArray([], onChange);
-
-const addToCart = (item) => {
-    order.push(item)
-}
-
+// Функция для удаления цвета из заказа
 const deleteFromCart = (item) => {
-    const indexItem = order.findLastIndex( (element) => element === item)
+    const indexItem = order.slice().reverse().findIndex((element) => element === item);
     if (indexItem !== -1) {
-        order.splice(indexItem, 1)
+        order.splice(order.length - 1 - indexItem, 1);
     }
-}
+};
