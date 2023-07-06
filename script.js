@@ -145,6 +145,7 @@ const notification = () => {
 orderButton.addEventListener('click', () => {
     closeModal();
     notification();
+    tg.sendData(`дата`)
 });
 
 
