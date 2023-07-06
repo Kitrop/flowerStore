@@ -1,4 +1,4 @@
-*, html, body {
+ы*, html, body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -240,7 +240,7 @@ body {
     width: 100%;
     height: 100%;
     overflow: auto;
-    animation: 0.5s ease openNotification, 0.5s 1.65s ease closeNotification;
+    animation: 0.5s ease openNotification, 1s 1.65s ease closeNotification;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
