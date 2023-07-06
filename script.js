@@ -20,6 +20,7 @@ const romashkiAdd = getElementById('romashki');
 const tulpaniAdd = getElementById('tulpani');
 
 const countCart = getElementById('count');
+const cart = getElementById('cart');
 
 const roseCrease = getElementById('rosa_crease');
 const pioniCrease = getElementById('pioni_crease');
@@ -31,16 +32,20 @@ const countDaisies = getElementById('countDaisies');
 const countPeonies = getElementById('countPeonies');
 const countTulips = getElementById('countTulips');
 
+const countTittle = getElementById('cart_countItems');
+
+const cleanCartBtn = getElementById('cleanCart');
+
 // Объект с информацией о цветах
 const flowers = {
-    'Розы': { add: roseAdd, crease: roseCrease },
-    'Тюльпаны': { add: tulpaniAdd, crease: tulpaniCrease },
-    'Ромашки': { add: romashkiAdd, crease: romashkiCrease },
-    'Пионы': { add: pioniAdd, crease: pioniCrease }
+    'Розы': {add: roseAdd, crease: roseCrease},
+    'Тюльпаны': {add: tulpaniAdd, crease: tulpaniCrease},
+    'Ромашки': {add: romashkiAdd, crease: romashkiCrease},
+    'Пионы': {add: pioniAdd, crease: pioniCrease}
 };
 
 // Создание отслеживаемого массива
-const order = createTrackedArray([], onChange);
+let order = createTrackedArray([], onChange);
 
 // Функция для создания отслеживаемого массива с обратным вызовом при изменениях
 function createTrackedArray(array, onChange) {
@@ -58,11 +63,13 @@ function createTrackedArray(array, onChange) {
     });
 }
 
+
+
 // Обработчик изменений в массиве
 function onChange() {
     // Обновление видимости элементов в зависимости от наличия цветов в заказе
     for (const flower in flowers) {
-        const { add, crease } = flowers[flower];
+        const {add, crease} = flowers[flower];
         if (order.includes(flower)) {
             add.style.display = 'none';
             crease.style.display = 'flex';
@@ -87,15 +94,116 @@ function onChange() {
     countCart.innerHTML = `(${order.length})`;
 }
 
+
 // Функция для добавления цвета в заказ
 const addToCart = (item) => {
-    order.push(item);
-};
+    order.push(item)
+}
 
-// Функция для удаления цвета из заказа
+// Функция для удаления из заказа
 const deleteFromCart = (item) => {
     const indexItem = order.slice().reverse().findIndex((element) => element === item);
     if (indexItem !== -1) {
         order.splice(order.length - 1 - indexItem, 1);
     }
-};
+}
+
+
+// Получение элементов DOM
+const modal = getElementById('modal');
+const modalContent = getElementById('modal-content');
+const closeBtn = getElementById('modal').getElementsByClassName('close')[0];
+const totalPrice = getElementById('totalPrice');
+const totalItems = getElementById('totalItems');
+const orderButton = getElementById('orderButton');
+
+
+// Функция для открытия модального окна
+function openModal() {
+    modal.style.display = 'block';
+}
+
+// Функция для закрытия модального окна
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+// Обработчик клика по кнопке "Корзина"
+cart.addEventListener('click', openModal);
+
+// Обработчик клика по кнопке закрытия модального окна
+closeBtn.addEventListener('click', closeModal);
+
+// Обработчик клика по кнопке "Заказать"
+orderButton.addEventListener('click', () => {
+    closeModal();
+});
+
+
+// Обновление информации в модальном окне
+function updateModalContent() {
+    const countRoseFn = countOccurrences(order, 'Розы');
+    const countPeoniesFn = countOccurrences(order, 'Пионы');
+    const countTulipsFn = countOccurrences(order, 'Тюльпаны');
+    const countRomashkiFn = countOccurrences(order, 'Ромашки');
+
+    const priceRose = 15000
+    const pricePeony = 10000
+    const priceTulip = 5000
+    const priceRomashki = 2500
+
+    const totalPriceValue = countRoseFn * priceRose +
+        countPeoniesFn * pricePeony +
+        countTulipsFn * priceTulip +
+        countRomashkiFn * priceRomashki;
+    if (totalPriceValue !== 0) {
+        countTittle.textContent = 'Количество товаров'
+        totalPrice.textContent = `Итоговая сумма: ${totalPriceValue} руб`;
+        totalItems.innerHTML = `
+            ${countRoseFn !== 0 ? `Розы: ${countRoseFn} <br>` : ''}
+            ${countPeoniesFn !== 0 ? `Пионы: ${countPeoniesFn} <br>` : ''}
+            ${countTulipsFn !== 0 ? `Тюльпаны: ${countTulipsFn} <br>` : ''}
+            ${countRomashkiFn !== 0 ? `Ромашки: ${countRomashkiFn} <br>` : ''}
+        `
+        orderButton.style.display = 'block'
+        cleanCartBtn.style.display = 'block'
+
+    } else {
+        countTittle.textContent = 'Корзина пустая, добавьте товары в корзину'
+        totalPrice.textContent = ''
+        totalItems.textContent = ''
+        orderButton.style.display = 'none'
+        cleanCartBtn.style.display = 'none'
+    }
+}
+
+// Обновление информации в модальном окне при клике на кнопку "Корзина"
+cart.addEventListener('click', () => {
+    updateModalContent();
+    openModal();
+});
+
+cleanCartBtn.addEventListener('click', () => {
+    order = [];
+    updateModalContent();
+    countCart.innerHTML = `(${order.length})`;
+})
+
+function handleKeyPress(event) {
+    if (event.keyCode === 27) { // 27 соответствует клавише Esc
+        closeModal();
+    }
+}
+
+document.addEventListener('keydown', handleKeyPress);
+
+modal.addEventListener('click', (e) => {
+    if(e.target.currentTarget === e.target) closeModal()
+})
+
+// Закрытие модального окна
+modal.addEventListener('click', (e) => {
+    if (e.target === modal || (e.target === modalContent && !modalContent.contains(e.relatedTarget))) {
+        closeModal();
+    }
+});

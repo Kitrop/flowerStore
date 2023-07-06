@@ -24,7 +24,7 @@
   <div class="wrapper">
     <div class="card">
       <img src="img/rosa.webp" alt="Розы" class="img"/>
-      <p class="card_tittle">Розы - 1500 руб</p>
+      <p class="card_tittle">Розы - 15000 руб</p>
       <p class="card_count" id="countRose"></p>
       <div class="card_btn__wraper">
         <div class="card_btn__add" id="rosa" onclick="addToCart('Розы')"><img src="img/plus.svg"/></div>
@@ -36,7 +36,7 @@
     </div>
     <div class="card">
       <img src="img/pioni.jpg" alt="Пионы" class="img"/>
-      <p class="card_tittle">Пионы - 1000 руб</p>
+      <p class="card_tittle">Пионы - 10000 руб</p>
       <p class="card_count" id="countPeonies"></p>
       <div class="card_btn__wraper">
         <div class="card_btn__add" id="pioni" onclick="addToCart('Пионы')"><img src="img/plus.svg"/></div>
@@ -50,7 +50,7 @@
   <div class="wrapper">
     <div class="card">
       <img src="img/tulpani.webp" alt="Тюльпаны" class="img"/>
-      <p class="card_tittle" >Тюльпаны - 7000 руб</p>
+      <p class="card_tittle" >Тюльпаны - 5000 руб</p>
       <p class="card_count" id="countTulips"></p>
       <div class="card_btn__wraper">
         <div class="card_btn__add" id="tulpani" onclick="addToCart('Тюльпаны')"><img src="img/plus.svg"/></div>
@@ -62,7 +62,7 @@
     </div>
     <div class="card">
       <img src="img/romashki.jpg" alt="Ромашки" class="img"/>
-      <p class="card_tittle">Ромашки - 4000 руб</p>
+      <p class="card_tittle">Ромашки - 2500 руб</p>
       <p class="card_count" id="countDaisies"></p>
       <div class="card_btn__wraper">
         <div class="card_btn__add" id="romashki" onclick="addToCart('Ромашки')"><img src="img/plus.svg"/></div>
@@ -74,7 +74,18 @@
     </div>
   </div>
 </main>
-
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 class="cart_tittle">Корзина</h2>
+    <h3 id="cart_countItems">Количество товаров</h3>
+    <p id="totalItems"></p>
+    <p id="totalPrice"></p>
+    <button id="orderButton">Заказать</button>
+    <img id="cleanCart" src="img/trash.svg" alt="clean cart" />
+  </div>
+</div>
 </body>
 <script src="script.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </html>
