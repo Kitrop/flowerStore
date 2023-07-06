@@ -116,7 +116,7 @@ const closeBtn = getElementById('modal').getElementsByClassName('close')[0];
 const totalPrice = getElementById('totalPrice');
 const totalItems = getElementById('totalItems');
 const orderButton = getElementById('orderButton');
-
+const notificationWrapper = getElementById('notification_wrapper')
 
 // Функция для открытия модального окна
 function openModal() {
@@ -134,9 +134,17 @@ cart.addEventListener('click', openModal);
 // Обработчик клика по кнопке закрытия модального окна
 closeBtn.addEventListener('click', closeModal);
 
+const notification = () => {
+    notificationWrapper.style.display = 'block'
+    setTimeout(() => {
+        notificationWrapper.style.display = 'none'
+    }, 1800)
+}
+
 // Обработчик клика по кнопке "Заказать"
 orderButton.addEventListener('click', () => {
     closeModal();
+    notification();
 });
 
 

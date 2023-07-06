@@ -65,7 +65,6 @@ body {
     align-items: center;
     min-height: 500px;
     width: 400px;
-    border: 2px solid #FFDAB9;
     border-radius: 5px;
     margin: 15px 20px 15px 0;
 }
@@ -181,7 +180,7 @@ body {
     padding: 20px;
     border: 1px solid #888;
     width: 80vw;
-    height: 50vh;
+    height: 60vh;
     background-color: #e3dbdb;
 }
 
@@ -218,8 +217,46 @@ body {
     display: none;
     position: relative;
     right: 1px;
-    top: 40px;
+    top: 38px;
     height: 20px;
     width: 20px;
     cursor: pointer;
+}
+
+@keyframes openNotification{
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+@keyframes closeNotification{
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}
+.notification_wrapper {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    animation: 0.5s ease openNotification, 0.5s 1.65s ease closeNotification;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.notification {
+    display: flex;
+    flex-direction: column;
+    margin: 10% auto;
+    height: 40vh;
+    width: 90vw;
+    align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    border: 1px solid #FFDAB9;
+    background-color: #fde2d1;
+}
+
+#nameClient {
+    margin-top: 15px;
+    font-size: 18px;
 }
