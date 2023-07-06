@@ -192,9 +192,9 @@ cart.addEventListener('click', () => {
 });
 
 cleanCartBtn.addEventListener('click', () => {
-    order = [];
+    order.splice(0, order.length);
+    onChange();
     updateModalContent();
-    countCart.innerHTML = `(${order.length})`;
 })
 
 function handleKeyPress(event) {
