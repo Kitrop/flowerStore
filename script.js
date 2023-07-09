@@ -64,6 +64,8 @@ function createTrackedArray(array, onChange) {
     });
 }
 
+
+// Создаем переменные для подсчета каждого товара
 let countRoseFn = 0
 let countPeoniesFn = 0
 let countTulipsFn = 0
@@ -145,11 +147,27 @@ const notification = () => {
     }, 1800)
 }
 
+// Переменная для подсчета суммы
+let totalPriceValue = 0
+
+// Данные о заказе
+const orderData = [
+    { name: 'Розы', count: countRoseFn },
+    { name: 'Пионы', count: countPeoniesFn },
+    { name: 'Тюльпаны', count: countTulipsFn },
+    { name: 'Ромашки', count: countDaisiesFn },
+]
+
+// Перебор данных о заказе(искл. товары которые не заказали)
+const orderDataMsg = orderData
+    .filter(i => i.count !== 0)
+    .map(i => ` ${i.name}: ${i.count}`)
+
 // Обработчик клика по кнопке "Заказать"
 orderButton.addEventListener('click', () => {
     closeModal();
     notification();
-    tg.sendData(`Розы: ${countRoseFn} Пионы: ${countPeoniesFn} Тюльпаны: ${countTulipsFn} Ромашки: ${countDaisiesFn}`)
+    tg.sendData(orderDataMsg + totalPriceValue)
 });
 
 
@@ -165,7 +183,7 @@ function updateModalContent() {
     const priceTulip = 5000
     const priceRomashki = 2500
 
-    const totalPriceValue = countRoseFn * priceRose +
+    totalPriceValue = countRoseFn * priceRose +
         countPeoniesFn * pricePeony +
         countTulipsFn * priceTulip +
         countRomashkiFn * priceRomashki;
@@ -196,20 +214,22 @@ cart.addEventListener('click', () => {
     openModal();
 });
 
+// Обработчик события на кнопку "очистить корзину"
 cleanCartBtn.addEventListener('click', () => {
     order.splice(0, order.length);
     onChange();
     updateModalContent();
 })
 
+// Закрытие модального окна при нажатии на esc
 function handleKeyPress(event) {
     if (event.keyCode === 27) { // 27 соответствует клавише Esc
         closeModal();
     }
 }
-
 document.addEventListener('keydown', handleKeyPress);
 
+// Закрытие модального окна при вне области модального окна
 modal.addEventListener('click', (e) => {
     if(e.target.currentTarget === e.target) closeModal()
 })
