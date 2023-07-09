@@ -1,15 +1,15 @@
 // Функция для получения элемента DOM по его идентификатору
-function getElementById(id) {
+const getElementById = (id) => {
     return document.querySelector(`#${id}`);
 }
 
 // Функция для подсчета количества повторений строки в массиве
-function countOccurrences(array, searchString) {
+const countOccurrences = (array, searchString) => {
     return array.reduce((count, string) => count + (string === searchString ? 1 : 0), 0);
 }
 
 // Функция для обновления элемента счетчика
-function updateCountElement(countElement, count) {
+const updateCountElement = (countElement, count) => {
     countElement.innerHTML = count !== 0 ? `Количество: ${count}` : '';
 }
 
@@ -49,7 +49,7 @@ const flowers = {
 let order = createTrackedArray([], onChange);
 
 // Функция для создания отслеживаемого массива с обратным вызовом при изменениях
-function createTrackedArray(array, onChange) {
+const createTrackedArray = (array, onChange) => {
     return new Proxy(array, {
         set(target, property, value) {
             target[property] = value;
@@ -72,7 +72,7 @@ let countTulipsFn = 0
 let countDaisiesFn = 0
 
 // Обработчик изменений в массиве
-function onChange() {
+const onChange = () => {
     // Обновление видимости элементов в зависимости от наличия цветов в заказе
     for (const flower in flowers) {
         const {add, crease} = flowers[flower];
@@ -125,12 +125,12 @@ const orderButton = getElementById('orderButton');
 const notificationWrapper = getElementById('notification_wrapper')
 
 // Функция для открытия модального окна
-function openModal() {
+const openModal = () => {
     modal.style.display = 'block';
 }
 
 // Функция для закрытия модального окна
-function closeModal() {
+const closeModal = () => {
     modal.style.display = 'none';
 }
 
@@ -162,6 +162,7 @@ const orderData = [
 const orderDataMsg = orderData
     .filter(i => i.count !== 0)
     .map(i => ` ${i.name}: ${i.count}`)
+    .join(' ')
 
 // Обработчик клика по кнопке "Заказать"
 orderButton.addEventListener('click', () => {
@@ -170,19 +171,20 @@ orderButton.addEventListener('click', () => {
     tg.sendData(orderDataMsg + totalPriceValue)
 });
 
+// Цена на цветы
+const priceRose = 15000
+const pricePeony = 10000
+const priceTulip = 5000
+const priceRomashki = 2500
 
 // Обновление информации в модальном окне
-function updateModalContent() {
+const updateModalContent = () => {
+    // Получение количества определенного товара
     const countRoseFn = countOccurrences(order, 'Розы');
     const countPeoniesFn = countOccurrences(order, 'Пионы');
     const countTulipsFn = countOccurrences(order, 'Тюльпаны');
     const countRomashkiFn = countOccurrences(order, 'Ромашки');
-
-    const priceRose = 15000
-    const pricePeony = 10000
-    const priceTulip = 5000
-    const priceRomashki = 2500
-
+    // Подсчет итоговой суммы
     totalPriceValue = countRoseFn * priceRose +
         countPeoniesFn * pricePeony +
         countTulipsFn * priceTulip +
@@ -198,8 +200,8 @@ function updateModalContent() {
         `
         orderButton.style.display = 'block'
         cleanCartBtn.style.display = 'flex'
-
-    } else {
+    }
+    else {
         countTittle.textContent = 'Корзина пустая, добавьте товары в корзину'
         totalPrice.textContent = ''
         totalItems.textContent = ''
@@ -222,7 +224,7 @@ cleanCartBtn.addEventListener('click', () => {
 })
 
 // Закрытие модального окна при нажатии на esc
-function handleKeyPress(event) {
+const handleKeyPress = (event) => {
     if (event.keyCode === 27) { // 27 соответствует клавише Esc
         closeModal();
     }
