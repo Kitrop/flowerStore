@@ -64,7 +64,10 @@ function createTrackedArray(array, onChange) {
     });
 }
 
-
+let countRoseFn = 0
+let countPeoniesFn = 0
+let countTulipsFn = 0
+let countDaisiesFn = 0
 
 // Обработчик изменений в массиве
 function onChange() {
@@ -81,10 +84,10 @@ function onChange() {
     }
 
     // Подсчет и обновление количества цветов в заказе
-    const countRoseFn = countOccurrences(order, 'Розы');
-    const countPeoniesFn = countOccurrences(order, 'Пионы');
-    const countTulipsFn = countOccurrences(order, 'Тюльпаны');
-    const countDaisiesFn = countOccurrences(order, 'Ромашки');
+    countRoseFn = countOccurrences(order, 'Розы');
+    countPeoniesFn = countOccurrences(order, 'Пионы');
+    countTulipsFn = countOccurrences(order, 'Тюльпаны');
+    countDaisiesFn = countOccurrences(order, 'Ромашки');
 
     updateCountElement(countRose, countRoseFn);
     updateCountElement(countPeonies, countPeoniesFn);
@@ -146,7 +149,7 @@ const notification = () => {
 orderButton.addEventListener('click', () => {
     closeModal();
     notification();
-    tg.sendData(`Розы: ${countRose} Пионы: ${countPeonies} Тюльпаны: ${countTulips} Ромашки: ${countDaisies}`)
+    tg.sendData(`Розы: ${countRoseFn} Пионы: ${countPeoniesFn} Тюльпаны: ${countTulipsFn} Ромашки: ${countDaisiesFn}`)
 });
 
 
