@@ -35,8 +35,8 @@ body {
 }
 
 .header_h1 {
-    font-size: 2em;
-    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9em;
+    font-family: 'Open Sans', sans-serif;
     font-style: italic;
     margin-left: 20px;
 }
@@ -74,8 +74,9 @@ body {
 }
 
 .img {
-    width: 370px;
+    width: 380px;
     height: 380px;
+    border-radius: 4px;
 }
 
 
@@ -129,15 +130,26 @@ body {
     width: 20px;
 }
 
+.cleanCart_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
 @media (max-width: 767px) {
     .main {
         flex-direction: column;
     }
     .card {
         width: 300px;
+        margin: 0;
+        min-height: 435px;
     }
     .img {
         width: 300px;
+        height: 300px;
     }
     .wrapper {
         display: flex;
@@ -213,9 +225,9 @@ body {
     background-color: #F5D6D6;
 }
 
-#cleanCart {
-    display: none;
-    position: relative;
+.trash_icon {
+    height: 20px;
+    width: 20px;
     right: 1px;
     top: 38px;
     height: 20px;
@@ -259,4 +271,26 @@ body {
 #nameClient {
     margin-top: 15px;
     font-size: 18px;
+}
+
+.cleanCart_span {
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.card_btn__add:active, .card_btn__decrease:active, .card_btn__increase:active, .card_btn__add:hover, .card_btn__decrease:hover, .card_btn__increase:hover {
+    border: 3px solid #FFDAB9;
+}
+
+.card_btn__add, .card_btn__decrease, .card_btn__increase {
+    transition: all 0.1s linear;
+}
+
+@keyframes openModal {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+}
+
+.modal {
+    animation: 0.3s ease openModal;
 }

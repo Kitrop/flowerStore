@@ -176,7 +176,7 @@ function updateModalContent() {
             ${countRomashkiFn !== 0 ? `Ромашки: ${countRomashkiFn} <br>` : ''}
         `
         orderButton.style.display = 'block'
-        cleanCartBtn.style.display = 'block'
+        cleanCartBtn.style.display = 'flex'
 
     } else {
         countTittle.textContent = 'Корзина пустая, добавьте товары в корзину'

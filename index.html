@@ -1,95 +1,98 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@0;1&family=Open+Sans&display=swap"
-        rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital@0;1&family=Open+Sans&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <header class="header">
-  <h1 class="header_h1">ЦВЕТОК И ТОЧКА</h1>
-  <div class="header_cart__wrapper">
-    <img id="cart" src="img/cart.svg" alt="Корзина" class="header_cart"/>
-    <span id="count"></span>
-  </div>
+    <h1 class="header_h1">ЦВЕТОК И ТОЧКА</h1>
+    <div class="header_cart__wrapper">
+        <img id="cart" src="img/cart.svg" alt="Корзина" class="header_cart"/>
+        <span id="count">(0)</span>
+    </div>
 </header>
 <main class="main">
-  <div class="wrapper">
-    <div class="card">
-      <img src="img/rosa.webp" alt="Розы" class="img"/>
-      <p class="card_tittle">Розы - 15000 руб</p>
-      <p class="card_count" id="countRose"></p>
-      <div class="card_btn__wraper">
-        <div class="card_btn__add" id="rosa" onclick="addToCart('Розы')"><img src="img/plus.svg"/></div>
-        <div class="card_btn_crease" id="rosa_crease">
-          <div class="card_btn__decrease" onclick="deleteFromCart('Розы')"><img src="img/minus.svg"/></div>
-          <div class="card_btn__increase" onclick="addToCart('Розы')"><img src="img/plus.svg"/></div>
+    <div class="wrapper">
+        <div class="card">
+            <img src="img/rosa.webp" alt="Розы" class="img"/>
+            <p class="card_tittle">Розы - 15000 руб</p>
+            <p class="card_count" id="countRose"></p>
+            <div class="card_btn__wraper">
+                <div class="card_btn__add" id="rosa" onclick="addToCart('Розы')"><img src="img/plus.svg"/></div>
+                <div class="card_btn_crease" id="rosa_crease">
+                    <div class="card_btn__decrease" onclick="deleteFromCart('Розы')"><img src="img/minus.svg"/></div>
+                    <div class="card_btn__increase" onclick="addToCart('Розы')"><img src="img/plus.svg"/></div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="card">
-      <img src="img/pioni.jpg" alt="Пионы" class="img"/>
-      <p class="card_tittle">Пионы - 10000 руб</p>
-      <p class="card_count" id="countPeonies"></p>
-      <div class="card_btn__wraper">
-        <div class="card_btn__add" id="pioni" onclick="addToCart('Пионы')"><img src="img/plus.svg"/></div>
-        <div class="card_btn_crease" id="pioni_crease">
-          <div class="card_btn__decrease"  onclick="deleteFromCart('Пионы')"><img src="img/minus.svg"/></div>
-          <div class="card_btn__increase"  onclick="addToCart('Пионы')"><img src="img/plus.svg"/></div>
+        <div class="card">
+            <img src="img/pioni.jpg" alt="Пионы" class="img"/>
+            <p class="card_tittle">Пионы - 10000 руб</p>
+            <p class="card_count" id="countPeonies"></p>
+            <div class="card_btn__wraper">
+                <div class="card_btn__add" id="pioni" onclick="addToCart('Пионы')"><img src="img/plus.svg"/></div>
+                <div class="card_btn_crease" id="pioni_crease">
+                    <div class="card_btn__decrease" onclick="deleteFromCart('Пионы')"><img src="img/minus.svg"/></div>
+                    <div class="card_btn__increase" onclick="addToCart('Пионы')"><img src="img/plus.svg"/></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="wrapper">
-    <div class="card">
-      <img src="img/tulpani.webp" alt="Тюльпаны" class="img"/>
-      <p class="card_tittle" >Тюльпаны - 5000 руб</p>
-      <p class="card_count" id="countTulips"></p>
-      <div class="card_btn__wraper">
-        <div class="card_btn__add" id="tulpani" onclick="addToCart('Тюльпаны')"><img src="img/plus.svg"/></div>
-        <div class="card_btn_crease" id="tulpani_crease">
-          <div class="card_btn__decrease" onclick="deleteFromCart('Тюльпаны')"><img src="img/minus.svg"/></div>
-          <div class="card_btn__increase" onclick="addToCart('Тюльпаны')"><img src="img/plus.svg"/></div>
+    <div class="wrapper">
+        <div class="card">
+            <img src="img/tulpani.webp" alt="Тюльпаны" class="img"/>
+            <p class="card_tittle">Тюльпаны - 5000 руб</p>
+            <p class="card_count" id="countTulips"></p>
+            <div class="card_btn__wraper">
+                <div class="card_btn__add" id="tulpani" onclick="addToCart('Тюльпаны')"><img src="img/plus.svg"/></div>
+                <div class="card_btn_crease" id="tulpani_crease">
+                    <div class="card_btn__decrease" onclick="deleteFromCart('Тюльпаны')"><img src="img/minus.svg"/></div>
+                    <div class="card_btn__increase" onclick="addToCart('Тюльпаны')"><img src="img/plus.svg"/></div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="card">
-      <img src="img/romashki.jpg" alt="Ромашки" class="img"/>
-      <p class="card_tittle">Ромашки - 2500 руб</p>
-      <p class="card_count" id="countDaisies"></p>
-      <div class="card_btn__wraper">
-        <div class="card_btn__add" id="romashki" onclick="addToCart('Ромашки')"><img src="img/plus.svg"/></div>
-        <div class="card_btn_crease" id="romashki_crease">
-          <div class="card_btn__decrease" onclick="deleteFromCart('Ромашки')"><img src="img/minus.svg"/></div>
-          <div class="card_btn__increase" onclick="addToCart('Ромашки')"><img src="img/plus.svg"/></div>
+        <div class="card">
+            <img src="img/romashki.jpg" alt="Ромашки" class="img"/>
+            <p class="card_tittle">Ромашки - 2500 руб</p>
+            <p class="card_count" id="countDaisies"></p>
+            <div class="card_btn__wraper">
+                <div class="card_btn__add" id="romashki" onclick="addToCart('Ромашки')"><img src="img/plus.svg"/></div>
+                <div class="card_btn_crease" id="romashki_crease">
+                    <div class="card_btn__decrease" onclick="deleteFromCart('Ромашки')"><img src="img/minus.svg"/></div>
+                    <div class="card_btn__increase" onclick="addToCart('Ромашки')"><img src="img/plus.svg"/></div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </main>
 <div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2 class="cart_tittle">Корзина</h2>
-    <h3 id="cart_countItems">Количество товаров</h3>
-    <p id="totalItems"></p>
-    <p id="totalPrice"></p>
-    <button id="orderButton">Заказать</button>
-    <img id="cleanCart" src="img/trash.svg" alt="clean cart" />
-  </div>
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 class="cart_tittle">Корзина</h2>
+        <h3 id="cart_countItems">Количество товаров</h3>
+        <p id="totalItems"></p>
+        <p id="totalPrice"></p>
+        <button id="orderButton">Заказать</button>
+        <div id="cleanCart" class="cleanCart_wrapper">
+          <img class="trash_icon" src="img/trash.svg" alt="clean cart" title="Очистить корзину"/>
+          <span class="cleanCart_span">Очистить корзину</span>
+        </div>
+    </div>
 </div>
 <div id="notification_wrapper" class="notification_wrapper">
-  <div class="notification">
-    <h2 class="">Спасибо за заказ</h2>
-    <div id="nameClient"></div>
-  </div>
+    <div class="notification">
+        <h2 class="">Спасибо за заказ</h2>
+        <div id="nameClient"></div>
+    </div>
 </div>
 </body>
 <script src="script.js"></script>
