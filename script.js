@@ -146,7 +146,7 @@ const notification = () => {
 orderButton.addEventListener('click', () => {
     closeModal();
     notification();
-    tg.sendData('какие либо данные')
+    tg.sendData(`Розы: ${countRose} Пионы: ${countPeonies} Тюльпаны: ${countTulips} Ромашки: ${countDaisies}`)
 });
 
 
