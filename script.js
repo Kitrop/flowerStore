@@ -9,7 +9,7 @@ const countOccurrences = (array, searchString) => {
 }
 
 // Функция для обновления элемента счетчика
-const updateCountElement = (countElement, count) => {
+const updateCountElement = (countElement, count)=> {
     countElement.innerHTML = count !== 0 ? `Количество: ${count}` : '';
 }
 
@@ -49,7 +49,7 @@ const flowers = {
 let order = createTrackedArray([], onChange);
 
 // Функция для создания отслеживаемого массива с обратным вызовом при изменениях
-const createTrackedArray = (array, onChange) => {
+function createTrackedArray(array, onChange) {
     return new Proxy(array, {
         set(target, property, value) {
             target[property] = value;
@@ -72,7 +72,7 @@ let countTulipsFn = 0
 let countDaisiesFn = 0
 
 // Обработчик изменений в массиве
-const onChange = () => {
+function onChange() {
     // Обновление видимости элементов в зависимости от наличия цветов в заказе
     for (const flower in flowers) {
         const {add, crease} = flowers[flower];
@@ -171,20 +171,20 @@ orderButton.addEventListener('click', () => {
     tg.sendData(orderDataMsg + totalPriceValue)
 });
 
-// Цена на цветы
+// Цены на товары
 const priceRose = 15000
 const pricePeony = 10000
 const priceTulip = 5000
 const priceRomashki = 2500
 
+
 // Обновление информации в модальном окне
 const updateModalContent = () => {
-    // Получение количества определенного товара
     const countRoseFn = countOccurrences(order, 'Розы');
     const countPeoniesFn = countOccurrences(order, 'Пионы');
     const countTulipsFn = countOccurrences(order, 'Тюльпаны');
     const countRomashkiFn = countOccurrences(order, 'Ромашки');
-    // Подсчет итоговой суммы
+
     totalPriceValue = countRoseFn * priceRose +
         countPeoniesFn * pricePeony +
         countTulipsFn * priceTulip +
@@ -200,8 +200,8 @@ const updateModalContent = () => {
         `
         orderButton.style.display = 'block'
         cleanCartBtn.style.display = 'flex'
-    }
-    else {
+
+    } else {
         countTittle.textContent = 'Корзина пустая, добавьте товары в корзину'
         totalPrice.textContent = ''
         totalItems.textContent = ''
