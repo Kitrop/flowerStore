@@ -116,7 +116,7 @@ const addToCart = (item) => {
 }
 
 // Функция для удаления из заказа
-const deleteFromCart = (item) => {
+function deleteFromCart(item) {
     const indexItem = order.slice().reverse().findIndex((element) => element === item);
     if (indexItem !== -1) {
         order.splice(order.length - 1 - indexItem, 1);

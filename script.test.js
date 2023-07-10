@@ -1,12 +1,38 @@
-const {addToCart, order} = require('./addToCart')
+const {addToCart, order, deleteFromCart} = require('./addToCart')
 
 describe('добавление в корзину', () => {
-    beforeEach(() => {
-        order.length = 0
-    })
-    test('Добавление в корзину розы и проверка на регистр', () => {
-        const item = 'Роза'
-        addToCart(item)
-        expect(order).toContain('роза')
+
+    const testCases = [
+        {
+            in: 'Роза',
+            expect: ['Роза']
+        },
+        {
+            in: 'Пиона',
+            expect: ['Пиона']
+        },
+        {
+            in: 1,
+            expect: [1]
+        },
+    ]
+    testCases.forEach(test => {
+        beforeEach(() => {
+            order.length = 0
+        })
+        it(`in: ${test.in}  out: ${test.expect}`, () => {
+            const item = 'Роза'
+            addToCart(item)
+            expect(order).toContain('роза')
+        })
     })
 })
+
+describe('удаление из корзины', () => {
+    test('удаление розы из корзины', () => {
+        const item = 'роза'
+        deleteFromCart(item)
+        expect(order).toEqual(['роза', 'тест', 'тюльпан'])
+    })
+})
+
